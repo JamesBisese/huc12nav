@@ -800,6 +800,7 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
         	geom = this.pointToExtent(geom, this.pointSearchTolerance);
         	  
         	//jab - Put a point on the place where the user clicked.
+              showLoading();
         	this.map_click_point = geom.getCenter();
 			
         	// put the users click point back on the map
@@ -3249,15 +3250,17 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
 		});
 
 		var navigation_direction = 'Upstream';
-		var noptions = this.divNavigationDirection;
-		for (i=0; i < noptions.length; i++)
-		{
-			if (noptions[i].checked == true)
-			{
-				navigation_direction = noptions[i].value;
-			}
-		}
-		
+        var noptions = document.getElementsByName("navigation_direction");
+        //var direction = '';
+        for (i=0; i < noptions.length; i++)
+        {
+            if (noptions[i].checked === true)
+            {
+                navigation_direction = noptions[i].value;
+                break;
+            }
+        }
+
 		/*
 		 * call to get HUC12 Upstream navigation results - This is a REST service - NOT GIS
 		 */
@@ -3398,7 +3401,7 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
             // show grid
             dojo.style(dom.byId("gridNavResults"), 'display', '');
             // NProgress.done();
-            // hideLoading();
+            hideLoading();
             // alert("Error: There are no navigation results for the selected HU");
             return;
         }
@@ -3525,7 +3528,6 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
             }
             promises = all(deferred_queries);
 
-            // promises.then(this.handleUpstreamNavigationQueryResults);
             console.time("ArcGIS Query");
 			promises.then(
 					function(data) { that.handleUpstreamNavigationQueryResults(data) }
@@ -3545,7 +3547,6 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
             exHUC12 = that.qtHUC12.execute(query12);
             promises = all([ exHUC12 ]); //
 
-            // promises.then(this.handleUpstreamNavigationQueryResults);
             console.time("ArcGIS Query");
 			promises.then(
 					function(data) { that.handleUpstreamNavigationQueryResults(data) }
@@ -3810,129 +3811,139 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
 	{
 		var that = this;
 		
-		//NProgress.done();
-		huc_json = this.results_json.huc12;
-		huc_json.pop();
+        //NProgress.done();
+        huc_json = this.results_json.huc12;
+        huc_json.pop();
 
-		var promises;
-		//data['huc8'] = data.huc12.value.substring(0, 8);
-		
-		if (data.ds_huc12_ids.value.length > 0)
-		{
-			// the rest service returns a list of the HUC12s called 'huc12_ids' (using NHD terminology)
-			//var huc12_ids = data.huc12_ids;
-			
-			huc12_ids_len = data.ds_huc12_ids.value.length;
-			
-			// get a list of the HUC8s for HUC12s that were found - these will be shown on the map
-			var huc8_ids = [];
-			array.forEach(data.ds_huc12_ids.value, function(huc12_id)
-			{
-				var huc8_id = huc12_id.substring(0, 8);
-				// don't add the HUC8 that contains the user clicked HUC12
-				if (huc8_id == data.huc8.value)
-				{
-					return;
-				}
-				if (huc8_ids.indexOf(huc8_id) === -1)
-				{ 
-					// this is a hack to fix a problem in the WBD HUC8 
-					if (huc8_id == '10160010')
-					{
-						huc8_ids.push('10160011')
-					}
-					if (huc8_id == '10160011')
-					{
-						huc8_ids.push('10160010')
-					}
-					
-					huc8_ids.push(huc8_id)
-				}
-			});
-			data['downstream_huc8_count_nu']['value'] = huc8_ids.length;
-			
-			// now send off the HUC12 query again, this time with a list of all HUC8s just created
-			// there is a limit of how many huc12_ids can be included.  it might be line length of the query
-			// it seems that the magic number is 90
-			var huc12_ids = []
-			var deferred_queries = [ ];
-				
-			var i,j,temparray;
-			// var chunk = 90; // replaced with global setting
-			for (i=0,j=data.ds_huc12_ids.value.length; i<j; i += this.huc12_array_slice_size) 
-			{
-			    temparray = data.ds_huc12_ids.value.slice(i, i + this.huc12_array_slice_size);
-			    
-			    // do whatever
-				var query12 = new Query();
-				query12.where = "HUC_12 in ('" + temparray.join("','") + "')";
-				query12.returnGeometry = true;
-				query12.outFields  = [ "*" ];
-				
-				this.qtHUC12 = new QueryTask(this.huc12_mapserver);
-				var exHUC12 = this.qtHUC12.execute(query12);
-				
-				deferred_queries.push(exHUC12);					    
-			}
-				
-			
+        var hu12_index_nu = '';
+        var hu12_list = [];
 
 
-			
-			if (huc8_ids.length > 0) //  & ! dom.byId("termsCheck").checked)
-			{
-				var query8 = new Query();
-				query8.where = this.huc8_id_field_name + " in ('" + huc8_ids.join("','") + "')";
-				query8.returnGeometry = true;
-				query8.outFields  = [ "*" ];
-	
-				this.qtHUC8 = new QueryTask(this.huc8_mapserver);
-				exHUC8 = this.qtHUC8.execute(query8);
-				
-				// don't include HUC8s in downstream navigation
-				//deferred_queries.push(exHUC8);
-			}
-			promises = all(deferred_queries);
-			
+        if (data.navigation_data !== null)
+        {
+            var hu12_index_nu = data.navigation_data.results.hu12_data.fields.huc_code;
+            var hu12_list = data.navigation_data.results.hu12_data.hu12_list;
+        }
+
+        huc12_ids_len = hu12_list.length;
+        if (huc12_ids_len > 0)
+        {
+
+
+            // get a list of the HUC8s for HUC12s that were found - these will be shown on the map
+            var huc8_ids = [];
+            array.forEach(hu12_list, function(hu12_tuple)
+            {
+                var hu12_id = hu12_tuple[hu12_index_nu];
+
+                var huc8_id = hu12_id.substring(0, 8);
+                // don't add the HUC8 that contains the user clicked HUC12
+                if (huc8_id == data.hu_data.huc_code.substring(0, 8))
+                {
+                    return;
+                }
+                if (huc8_ids.indexOf(huc8_id) === -1)
+                {
+                    huc8_ids.push(huc8_id)
+                }
+            });
+            // data['downstream_huc8_count_nu']['value'] = huc8_ids.length;
+
+            // now send off the HUC12 query again, this time with a list of all HUC8s just created
+            // there is a limit of how many huc12_ids can be included.  it might be line length of the query
+            // it seems that the magic number is 90
+            var huc12_ids = []
+            var deferred_queries = [ ];
+
+
+                //huc12_ids =	closest_slice(data.us_huc12_ids.value, 90, data.huc12.value);
+
+            var i,j,temparray,chunk = 90;
+            for (i=0,j=huc12_ids_len; i<j; i+=chunk)
+            {
+                temparray = hu12_list.slice(i,i+chunk);
+
+                var hu12s = []
+                array.forEach(temparray, function(hu12_tuple) {
+                    hu12s.push(hu12_tuple[hu12_index_nu]);
+                });
+
+                var query12 = new Query();
+                query12.where = "HUC_12 in ('" + hu12s.join("','") + "')";
+
+                query12.returnGeometry = true;
+                query12.outFields  = [ "*" ];
+
+                this.qtHUC12 = new QueryTask(this.huc12_mapserver);
+                var exHUC12 = this.qtHUC12.execute(query12);
+
+                deferred_queries.push(exHUC12);
+            }
+
+
+
+
+            //TODO maybe we dont need the hu8s on downstream
+            if (huc8_ids.length > 0) //  & ! dom.byId("termsCheck").checked)
+            {
+                // var query8 = new Query();
+                // query8.where = "HUC_8 in ('" + huc8_ids.join("','") + "')";
+                // query8.returnGeometry = true;
+                // query8.outFields  = [ "*" ];
+                //
+                // app.qtHUC8 = new QueryTask(huc8_mapserver);
+                // exHUC8 = app.qtHUC8.execute(query8);
+                //
+                // deferred_queries.push(exHUC8);
+            }
+            promises = all(deferred_queries);
+
+            console.time("ArcGIS Query");
+
+            // promises.then(this.handleUpstreamNavigationQueryResults);
 			promises.then(
 					function(data) { that.handleUpstreamNavigationQueryResults(data) }
 				);
-			
+            console.log("running " + deferred_queries.length + " HUC12 Downstream GIS queries");
+        }
+        else
+        {
+            var query12 = new Query();
+            query12.where = "HUC_12 = '" + data.huc12 + "'";
+            query12.returnGeometry = true;
+            query12.outFields  = [ "*" ];
 
-			console.log("running " + deferred_queries.length + " HUC8 Downstream GIS queries");
-		}
-		else
-		{
-			var query12 = new Query();
-			query12.where = "HUC_12 = '" + data.huc12 + "'";
-			query12.returnGeometry = true;
-			query12.outFields  = [ "*" ];
+            this.qtHUC12 = new QueryTask(this.huc12_mapserver);
+            exHUC12 = this.qtHUC12.execute(query12);
+            promises = all([ exHUC12 ]); //
 
-			this.qtHUC12 = new QueryTask(this.huc12_mapserver);
-			exHUC12 = this.qtHUC12.execute(query12);
-			promises = all([ exHUC12 ]); //
-			
+            console.time("ArcGIS Query");
+            // promises.then(this.handleUpstreamNavigationQueryResults);
 			promises.then(
 					function(data) { that.handleUpstreamNavigationQueryResults(data) }
 				);
-			
-			console.log("running single HUC12 Downstream queries");
-		}
-		huc_json.push({'NAVIGATION_RESULTS': data });
-		
-		this.populate_gridNavResults(data);
-		// show grid
-		dojo.style(dom.byId("gridNavResults"), 'display', '');
-		//dojo.style(dom.byId("gridAttributeResults"), 'display', '');
-		
-		this.results_json.huc12 = huc_json;
-		//if (featHUC12.length == 1)
-		//{
-		//	results_json.huc12.push('GETTING GIS RESULTS <img src=/wbdmap/images/hourglass.gif />');
-		//}
-		//str = 'JSON: ' + JSON.stringify(results_json, null, 4);
+            console.log("running single HUC12 Downstream queries");
+        }
+        huc_json.push({'NAVIGATION_RESULTS': data });
 
-		dom.byId("results").innerHTML = '';
+        this.tableNavigationResults(data);
+        // show grid
+        dojo.style(dom.byId("gridNavResults"), 'display', '');
+        //dojo.style(dom.byId("gridAttributeResults"), 'display', '');
+
+        this.results_json.huc12 = huc_json;
+        if (this.featHUC12.length == 1)
+        {
+            this.results_json.huc12.push('GETTING GIS RESULTS <img src=/wbdmap/images/hourglass.gif />');
+            if (data.hu_data.terminal_bool == true){
+                that.map.graphics.graphics[1].symbol = this.huc12_terminal_symbol();
+                that.map.graphics.refresh();
+            }
+        }
+        str = 'JSON: ' + JSON.stringify(this.results_json, null, 4);
+
+        dom.byId("NavigationMessages").innerHTML = '';
+        dom.byId("NavigateErrorMessage").innerHTML = '';
 	},
 	
 	navigationFailed: function(error) 
@@ -5670,6 +5681,7 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
             dijit.byId('gridAttributeResults').resize();
 
             //NProgress.start();
+            showLoading();
             t0 = performance.now();
             //request.then(this.recomputeSucceeded, this.recomputeFailed);
             request.then(
@@ -5753,3 +5765,126 @@ function chkNumeric(evt) {
 	}
 	return true;
 }
+		// //NProgress.done();
+		// huc_json = this.results_json.huc12;
+		// huc_json.pop();
+        //
+		// var promises;
+		// //data['huc8'] = data.huc12.value.substring(0, 8);
+		//
+		// if (data.ds_huc12_ids.value.length > 0)
+		// {
+		// 	// the rest service returns a list of the HUC12s called 'huc12_ids' (using NHD terminology)
+		// 	//var huc12_ids = data.huc12_ids;
+		//
+		// 	huc12_ids_len = data.ds_huc12_ids.value.length;
+		//
+		// 	// get a list of the HUC8s for HUC12s that were found - these will be shown on the map
+		// 	var huc8_ids = [];
+		// 	array.forEach(data.ds_huc12_ids.value, function(huc12_id)
+		// 	{
+		// 		var huc8_id = huc12_id.substring(0, 8);
+		// 		// don't add the HUC8 that contains the user clicked HUC12
+		// 		if (huc8_id == data.huc8.value)
+		// 		{
+		// 			return;
+		// 		}
+		// 		if (huc8_ids.indexOf(huc8_id) === -1)
+		// 		{
+		// 			// this is a hack to fix a problem in the WBD HUC8
+		// 			if (huc8_id == '10160010')
+		// 			{
+		// 				huc8_ids.push('10160011')
+		// 			}
+		// 			if (huc8_id == '10160011')
+		// 			{
+		// 				huc8_ids.push('10160010')
+		// 			}
+		//
+		// 			huc8_ids.push(huc8_id)
+		// 		}
+		// 	});
+		// 	data['downstream_huc8_count_nu']['value'] = huc8_ids.length;
+		//
+		// 	// now send off the HUC12 query again, this time with a list of all HUC8s just created
+		// 	// there is a limit of how many huc12_ids can be included.  it might be line length of the query
+		// 	// it seems that the magic number is 90
+		// 	var huc12_ids = []
+		// 	var deferred_queries = [ ];
+		//
+		// 	var i,j,temparray;
+		// 	// var chunk = 90; // replaced with global setting
+		// 	for (i=0,j=data.ds_huc12_ids.value.length; i<j; i += this.huc12_array_slice_size)
+		// 	{
+		// 	    temparray = data.ds_huc12_ids.value.slice(i, i + this.huc12_array_slice_size);
+		//
+		// 	    // do whatever
+		// 		var query12 = new Query();
+		// 		query12.where = "HUC_12 in ('" + temparray.join("','") + "')";
+		// 		query12.returnGeometry = true;
+		// 		query12.outFields  = [ "*" ];
+		//
+		// 		this.qtHUC12 = new QueryTask(this.huc12_mapserver);
+		// 		var exHUC12 = this.qtHUC12.execute(query12);
+		//
+		// 		deferred_queries.push(exHUC12);
+		// 	}
+		//
+		//
+        //
+        //
+		//
+		// 	if (huc8_ids.length > 0) //  & ! dom.byId("termsCheck").checked)
+		// 	{
+		// 		var query8 = new Query();
+		// 		query8.where = this.huc8_id_field_name + " in ('" + huc8_ids.join("','") + "')";
+		// 		query8.returnGeometry = true;
+		// 		query8.outFields  = [ "*" ];
+        //
+		// 		this.qtHUC8 = new QueryTask(this.huc8_mapserver);
+		// 		exHUC8 = this.qtHUC8.execute(query8);
+		//
+		// 		// don't include HUC8s in downstream navigation
+		// 		//deferred_queries.push(exHUC8);
+		// 	}
+		// 	promises = all(deferred_queries);
+		//
+		// 	promises.then(
+		// 			function(data) { that.handleUpstreamNavigationQueryResults(data) }
+		// 		);
+		//
+        //
+		// 	console.log("running " + deferred_queries.length + " HUC8 Downstream GIS queries");
+		// }
+		// else
+		// {
+		// 	var query12 = new Query();
+		// 	query12.where = "HUC_12 = '" + data.huc12 + "'";
+		// 	query12.returnGeometry = true;
+		// 	query12.outFields  = [ "*" ];
+        //
+		// 	this.qtHUC12 = new QueryTask(this.huc12_mapserver);
+		// 	exHUC12 = this.qtHUC12.execute(query12);
+		// 	promises = all([ exHUC12 ]); //
+		//
+		// 	promises.then(
+		// 			function(data) { that.handleUpstreamNavigationQueryResults(data) }
+		// 		);
+		//
+		// 	console.log("running single HUC12 Downstream queries");
+		// }
+		// huc_json.push({'NAVIGATION_RESULTS': data });
+		//
+		// this.populate_gridNavResults(data);
+		// // show grid
+		// dojo.style(dom.byId("gridNavResults"), 'display', '');
+		// //dojo.style(dom.byId("gridAttributeResults"), 'display', '');
+		//
+		// this.results_json.huc12 = huc_json;
+		// //if (featHUC12.length == 1)
+		// //{
+		// //	results_json.huc12.push('GETTING GIS RESULTS <img src=/wbdmap/images/hourglass.gif />');
+		// //}
+		// //str = 'JSON: ' + JSON.stringify(results_json, null, 4);
+        //
+		// dom.byId("results").innerHTML = '';

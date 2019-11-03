@@ -46,3 +46,36 @@ Supported browsers for deployed applications*:
 ### ArcGIS API for JavaScript requiremets
 
 Recommend [the latest version](https://developers.arcgis.com/javascript/jshelp/whats_new.html) of ArcGIS JavaScript API for 2D apps, and [version 4.x](https://developers.arcgis.com/javascript/) for 3D apps.
+
+# Update using GitHub
+
+The application is delivered as a GitHub repository.  This allows sharing
+updates based on user input or the chance to add new functionality.
+
+To update
+
+~~~~
+
+james.bisese@DIVS704INSWEB1 C:\inetpub\wwwroot\huc12nav
+$ dir
+...
+11/03/2019  01:42 PM            20,654 3rd-party-license.txt
+11/03/2019  01:42 PM               212 appinfo.json
+11/03/2019  01:42 PM            15,926 config-readme.txt
+11/03/2019  01:42 PM            23,152 config.json
+11/03/2019  01:42 PM    <DIR>          configs
+11/03/2019  01:42 PM    <DIR>          dynamic-modules
+11/03/2019  01:42 PM            11,095 env.js
+11/03/2019  01:42 PM    <DIR>          images
+11/03/2019  01:42 PM             4,000 index.html
+11/03/2019  01:42 PM             7,471 init.js
+11/03/2019  01:42 PM    <DIR>          jimu.js
+11/03/2019  01:42 PM    <DIR>          libs
+11/03/2019  01:42 PM             3,854 readme.html
+11/03/2019  01:42 PM             2,752 README.md
+11/03/2019  01:42 PM             5,008 simpleLoader.js
+11/03/2019  01:42 PM    <DIR>          themes
+11/03/2019  01:42 PM               521 web.config
+11/03/2019  01:43 PM    <DIR>          widgets
+...
+~~~~
