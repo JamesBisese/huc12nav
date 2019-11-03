@@ -1,0 +1,19 @@
+.jimu-widget-zoomin {
+	background-color: rgba(0,0,0,0.1);
+	-webkit-border-radius: 5px 5px 0 0;
+	background-size: 80% 80%;
+	background-image: url("../images/icon.png");
+	background-position: center center;
+	background-repeat: no-repeat;	
+	width: 30px;
+	height: 30px;
+	border-bottom: 1px solid #57585A;
+} 
+
+.jimu-widget-zoomin:hover {
+	background-color: rgba(0,0,0,0.3);
+} 
+
+.jimu-widget-zoomin.jimu-state-selected {
+	background-color: rgba(0,0,0,0.7);
+} 

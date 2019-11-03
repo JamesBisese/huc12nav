@@ -1,0 +1,814 @@
+{
+  "theme": {
+    "name": "FoldableTheme",
+    "styles": [
+      "blue",
+      "default",
+      "black",
+      "cyan",
+      "green",
+      "purple",
+      "red",
+      "yellow"
+    ],
+    "version": "2.5",
+    "sharedTheme": {
+      "isPortalSupport": true,
+      "useHeader": false,
+      "useLogo": false
+    }
+  },
+  "portalUrl": "http://tt-mmi.maps.arcgis.com",
+  "appId": "",
+  "authorizedCrossOriginDomains": [],
+  "title": "Watershed Boundary Dataset Subwatershed (HUC12)  Navigator",
+  "subtitle": "Tetra Tech - for USEPA EnviroAtlas",
+  "keepAppState": true,
+  "logo": "images/app-logo.png",
+  "geometryService": "https://utility.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer",
+  "links": [],
+  "widgetOnScreen": {
+    "widgets": [
+      {
+        "uri": "widgets/LocalLayer/Widget",
+        "id": "widgets_LocalLayer_Widget_20",
+        "name": "LocalLayer",
+        "version": "2.5",
+        "config": "configs/LocalLayer/config_LocalLayer.json",
+        "position": {
+          "relativeTo": "map"
+        }
+      },
+      {
+        "uri": "themes/FoldableTheme/widgets/HeaderController/Widget",
+        "position": {
+          "left": 0,
+          "top": 0,
+          "right": 0,
+          "height": 40,
+          "relativeTo": "browser"
+        },
+        "version": "2.5",
+        "id": "themes_FoldableTheme_widgets_HeaderController_Widget_1",
+        "name": "HeaderController"
+      },
+      {
+        "uri": "widgets/Scalebar/Widget",
+        "position": {
+          "left": 35,
+          "bottom": 55,
+          "relativeTo": "map"
+        },
+        "version": "2.1",
+        "id": "widgets_Scalebar_Widget_16",
+        "icon": "widgets/Scalebar/images/icon.png?wab_dv=2.1",
+        "name": "Scalebar"
+      },
+      {
+        "uri": "widgets/Coordinate/Widget",
+        "position": {
+          "left": 25,
+          "bottom": 10,
+          "relativeTo": "map"
+        },
+        "version": "2.1",
+        "id": "widgets_Coordinate_Widget_17",
+        "icon": "widgets/Coordinate/images/icon.png?wab_dv=2.1",
+        "name": "Coordinate"
+      },
+      {
+        "uri": "widgets/Search/Widget",
+        "position": {
+          "left": 55,
+          "top": 5,
+          "relativeTo": "map"
+        },
+        "version": "2.5",
+        "id": "widgets_Search_Widget_3",
+        "name": "Search"
+      },
+      {
+        "position": {
+          "left": 55,
+          "top": 45,
+          "relativeTo": "map",
+          "widget_bottom": 8,
+          "widget_left": 5
+        },
+        "placeholderIndex": 1,
+        "id": "widgets_HUC12Nav",
+        "name": "ttHUC12Nav",
+        "version": "2.5",
+        "closeable": true,
+        "uri": "widgets/ttHUC12Nav/Widget",
+        "HOLDconfig": "configs/ttHUC12Nav/config_ttHUC12Nav.json",
+        "openAtStart": true
+      },
+
+      {
+        "position": {
+          "left": 105,
+          "top": 45,
+          "relativeTo": "map"
+        },
+        "placeholderIndex": 1,
+        "id": "_5",
+        "name": "Query",
+        "version": "2.5",
+        "closeable": true,
+        "uri": "widgets/Query/Widget",
+        "config": "configs/Query/config_Query.json"
+      },
+      {
+        "position": {
+          "left": 155,
+          "top": 45,
+          "relativeTo": "map"
+        },
+        "placeholderIndex": 1,
+        "id": "_7"
+      },
+      {
+        "position": {
+          "left": 205,
+          "top": 45,
+          "relativeTo": "map"
+        },
+        "placeholderIndex": 2,
+        "id": "_8"
+      },
+      {
+        "position": {
+          "left": 255,
+          "top": 45,
+          "relativeTo": "map"
+        },
+        "placeholderIndex": 3,
+        "id": "_9"
+      },
+      {
+        "uri": "widgets/OverviewMap/Widget",
+        "position": {
+          "bottom": 0,
+          "right": 0,
+          "zIndex": 1,
+          "relativeTo": "map"
+        },
+        "version": "2.5",
+        "id": "widgets_OverviewMap_Widget_10",
+        "name": "OverviewMap"
+      },
+      {
+        "uri": "widgets/HomeButton/Widget",
+        "position": {
+          "left": 7,
+          "top": 75,
+          "relativeTo": "map"
+        },
+        "version": "2.5",
+        "id": "widgets_HomeButton_Widget_11",
+        "name": "HomeButton"
+      },
+      {
+        "uri": "widgets/ZoomIn/Widget",
+        "version": "1.0.3",
+        "position": {
+          "left": 7,
+          "top": 110,
+          "relativeTo": "map"
+        },
+        "id": "widgets_ZoomIn_Widget_10_11",
+        "positionRelativeTo": "map",
+        "name": "ZoomIn",
+        "label": "Zoom In",
+        "icon": "widgets/ZoomIn/images/icon.png?wab_dv=2.1"
+      },
+      {
+        "uri": "widgets/Pan/Widget",
+        "position": {
+          "left": 7,
+          "top": 140,
+          "relativeTo": "map"
+        },
+        "id": "widgets_Pan_Widget_10_13",
+        "positionRelativeTo": "map",
+        "name": "Pan",
+        "icon": "widgets/Pan/images/icon.png?wab_dv=2.1",
+        "version": "1.1.0"
+      },
+      {
+        "uri": "widgets/ZoomOut/Widget",
+        "version": "1.0.3",
+        "position": {
+          "left": 7,
+          "top": 170,
+          "relativeTo": "map"
+        },
+        "id": "widgets_ZoomOut_Widget_10_12",
+        "positionRelativeTo": "map",
+        "name": "ZoomOut",
+        "label": "Zoom Out",
+        "icon": "widgets/ZoomOut/images/icon.png?wab_dv=2.1"
+      },
+      {
+        "uri": "widgets/ZoomPrevNext/Widget",
+        "position": {
+          "left": 7,
+          "top": 210,
+          "relativeTo": "map"
+        },
+        "version": "1.1.1",
+        "id": "widgets_ZoomPrevNext_Widget_31",
+        "icon": "widgets/ZoomPrevNext/images/icon.png?wab_dv=2.1",
+        "name": "ZoomPrevNext"
+      },
+      {
+        "uri": "widgets/AttributeTable/Widget",
+        "position": {
+          "relativeTo": "browser"
+        },
+        "version": "2.5",
+        "id": "widgets_AttributeTable_Widget_13",
+        "name": "AttributeTable"
+      },
+      {
+        "uri": "widgets/Splash/Widget",
+        "visible": false,
+        "position": {
+          "relativeTo": "browser"
+        },
+        "version": "2.5",
+        "id": "widgets_Splash_Widget_14",
+        "name": "Splash"
+      },
+      {
+        "uri": "widgets/ZoomSlider/Widget",
+        "position": {
+          "top": 5,
+          "left": 7,
+          "relativeTo": "map"
+        },
+        "version": "2.1",
+        "id": "widgets_ZoomSlider_Widget_15",
+        "name": "ZoomSlider"
+      },
+      {
+        "uri": "widgets/ExtentNavigate/Widget",
+        "visible": false,
+        "position": {
+          "top": 150,
+          "left": 7,
+          "relativeTo": "map"
+        },
+        "id": "widgets_ExtentNavigate_Widget_16",
+        "name": "ExtentNavigate",
+        "version": "2.5"
+      },
+      {
+        "uri": "widgets/FullScreen/Widget",
+        "visible": false,
+        "position": {
+          "right": 8,
+          "top": 8,
+          "relativeTo": "map"
+        },
+        "version": "2.5",
+        "id": "widgets_FullScreen_Widget_17",
+        "name": "FullScreen"
+      }
+    ],
+    "panel": {
+      "uri": "jimu/OnScreenWidgetPanel",
+      "position": {
+        "relativeTo": "map"
+      }
+    }
+  },
+  "map": {
+    "3D": false,
+    "2D": true,
+    "position": {
+      "left": 0,
+      "top": 40,
+      "right": 0,
+      "bottom": 0
+    },
+    "itemId": "c8e6c4f081ad4b008c34b61f22236714",
+    "mapOptions": {
+      "extent": {
+        "xmin": -13354180.242527302,
+        "ymin": 2697029.719825518,
+        "xmax": -7796902.538083326,
+        "ymax": 6463846.473718002,
+        "spatialReference": {
+          "wkid": 102100
+        }
+      }
+    },
+    "id": "map",
+    "portalUrl": "http://tt-mmi.maps.arcgis.com"
+  },
+  "widgetPool": {
+    "panel": {
+      "uri": "themes/FoldableTheme/panels/FoldablePanel/Panel",
+      "position": {
+        "top": 5,
+        "right": 5,
+        "bottom": 5,
+        "zIndex": 5,
+        "relativeTo": "map"
+      }
+    },
+    "widgets": [
+      {
+        "uri": "widgets/Legend/Widget",
+        "version": "2.5",
+        "id": "widgets_Legend_Widget_18",
+        "name": "Legend",
+        "index": 2
+      },
+      {
+        "uri": "widgets/LayerList/Widget",
+        "version": "2.5",
+        "id": "widgets_LayerList_Widget_19",
+        "name": "LayerList",
+        "index": 3
+      },
+      {
+        "name": "Bookmark",
+        "version": "2.5",
+        "uri": "widgets/Bookmark/Widget",
+        "config": "configs/Bookmark/config_Bookmark.json",
+        "index": 5,
+        "id": "widgets_Bookmark_Widget_32"
+      }
+    ],
+    "groups": []
+  },
+  "mobileLayout": {
+    "widgetOnScreen": {
+      "widgets": {
+        "widgets/Scalebar/Widget": {
+          "position": {
+            "left": 7,
+            "bottom": 40
+          },
+          "version": "1.4"
+        },
+        "widgets/Coordinate/Widget": {
+          "position": {
+            "left": 7,
+            "bottom": 17
+          },
+          "version": "1.4"
+        }
+      }
+    }
+  },
+  "loadingPage": {
+    "backgroundColor": "#61b4ff",
+    "backgroundImage": {
+      "visible": false
+    },
+    "loadingGif": {
+      "visible": true,
+      "uri": "/webappbuilder/apps/2/configs/loading/images/predefined_loading_3.gif",
+      "width": 32,
+      "height": 32
+    }
+  },
+  "wabVersion": "2.5",
+  "isTemplateApp": true,
+  "isWebTier": false,
+  "httpProxy": {
+    "useProxy": true,
+    "alwaysUseProxy": false,
+    "url": "/proxy/",
+    "rules": []
+  },
+  "dataSource": {
+    "dataSources": {
+      "widget~_5~0": {
+        "id": "widget~_5~0",
+        "type": "Features",
+        "label": "Water Monitoring Locations",
+        "dataSchema": {
+          "geometryType": "esriGeometryPoint",
+          "fields": [
+            {
+              "name": "PKISNIDENTIFIER",
+              "type": "esriFieldTypeOID",
+              "alias": "PKISNIDENTIFIER",
+              "domain": null
+            },
+            {
+              "name": "ORGANIZATIONIDENTIFIER",
+              "type": "esriFieldTypeString",
+              "alias": "ORGANIZATIONIDENTIFIER",
+              "length": 256,
+              "domain": null
+            },
+            {
+              "name": "ORGANIZATIONFORMALNAME",
+              "type": "esriFieldTypeString",
+              "alias": "ORGANIZATIONFORMALNAME",
+              "length": 256,
+              "domain": null
+            },
+            {
+              "name": "MONITORINGLOCATIONIDENTIFIER",
+              "type": "esriFieldTypeString",
+              "alias": "MONITORINGLOCATIONIDENTIFIER",
+              "length": 256,
+              "domain": null
+            },
+            {
+              "name": "MONITORINGLOCATIONNAME",
+              "type": "esriFieldTypeString",
+              "alias": "MONITORINGLOCATIONNAME",
+              "length": 768,
+              "domain": null
+            },
+            {
+              "name": "MONITORINGLOCATIONTYPENAME",
+              "type": "esriFieldTypeString",
+              "alias": "MONITORINGLOCATIONTYPENAME",
+              "length": 256,
+              "domain": null
+            },
+            {
+              "name": "LATITUDEMEASURE",
+              "type": "esriFieldTypeDouble",
+              "alias": "LATITUDEMEASURE",
+              "domain": null
+            },
+            {
+              "name": "LONGITUDEMEASURE",
+              "type": "esriFieldTypeDouble",
+              "alias": "LONGITUDEMEASURE",
+              "domain": null
+            },
+            {
+              "name": "HORIZONTALREFERENCEDATUMCODE",
+              "type": "esriFieldTypeString",
+              "alias": "HORIZONTALREFERENCEDATUMCODE",
+              "length": 5,
+              "domain": null
+            },
+            {
+              "name": "HORIZONTALREFERENCEDATUMNAME",
+              "type": "esriFieldTypeString",
+              "alias": "HORIZONTALREFERENCEDATUMNAME",
+              "length": 26,
+              "domain": null
+            },
+            {
+              "name": "HORIZONTALCOLLECTIONMETHODNAME",
+              "type": "esriFieldTypeString",
+              "alias": "HORIZONTALCOLLECTIONMETHODNAME",
+              "length": 254,
+              "domain": null
+            },
+            {
+              "name": "SOURCEMAPSCALENUMBER",
+              "type": "esriFieldTypeString",
+              "alias": "SOURCEMAPSCALENUMBER",
+              "length": 20,
+              "domain": null
+            },
+            {
+              "name": "VERTICALMEASUREVALUE",
+              "type": "esriFieldTypeString",
+              "alias": "VERTICALMEASUREVALUE",
+              "length": 15,
+              "domain": null
+            },
+            {
+              "name": "VERTICALMEASUREUNITCODE",
+              "type": "esriFieldTypeString",
+              "alias": "VERTICALMEASUREUNITCODE",
+              "length": 15,
+              "domain": null
+            },
+            {
+              "name": "VERTICALREFERENCEDATUMCODE",
+              "type": "esriFieldTypeString",
+              "alias": "VERTICALREFERENCEDATUMCODE",
+              "length": 12,
+              "domain": null
+            },
+            {
+              "name": "VERTICALREFERENCEDATUMNAME",
+              "type": "esriFieldTypeString",
+              "alias": "VERTICALREFERENCEDATUMNAME",
+              "length": 254,
+              "domain": null
+            },
+            {
+              "name": "VERTICALCOLLECTIONMETHODTEXT",
+              "type": "esriFieldTypeString",
+              "alias": "VERTICALCOLLECTIONMETHODTEXT",
+              "length": 254,
+              "domain": null
+            },
+            {
+              "name": "COUNTRYNAME",
+              "type": "esriFieldTypeString",
+              "alias": "COUNTRYNAME",
+              "length": 256,
+              "domain": null
+            },
+            {
+              "name": "STATENAME",
+              "type": "esriFieldTypeString",
+              "alias": "STATENAME",
+              "length": 256,
+              "domain": null
+            },
+            {
+              "name": "COUNTYNAME",
+              "type": "esriFieldTypeString",
+              "alias": "COUNTYNAME",
+              "length": 256,
+              "domain": null
+            },
+            {
+              "name": "COUNTRYCODE",
+              "type": "esriFieldTypeString",
+              "alias": "COUNTRYCODE",
+              "length": 2,
+              "domain": null
+            },
+            {
+              "name": "FIPSSTATECODE",
+              "type": "esriFieldTypeString",
+              "alias": "FIPSSTATECODE",
+              "length": 4,
+              "domain": null
+            },
+            {
+              "name": "FIPSCOUNTYCODE",
+              "type": "esriFieldTypeString",
+              "alias": "FIPSCOUNTYCODE",
+              "length": 3,
+              "domain": null
+            },
+            {
+              "name": "HUCEIGHTDIGITCODE",
+              "type": "esriFieldTypeString",
+              "alias": "HUCEIGHTDIGITCODE",
+              "length": 8,
+              "domain": null
+            },
+            {
+              "name": "HUCEIGHTDIGITNAME",
+              "type": "esriFieldTypeString",
+              "alias": "HUCEIGHTDIGITNAME",
+              "length": 200,
+              "domain": null
+            },
+            {
+              "name": "RF1SEGMENTCODE",
+              "type": "esriFieldTypeString",
+              "alias": "RF1SEGMENTCODE",
+              "length": 3,
+              "domain": null
+            },
+            {
+              "name": "RF1SEGMENTNAME",
+              "type": "esriFieldTypeString",
+              "alias": "RF1SEGMENTNAME",
+              "length": 30,
+              "domain": null
+            },
+            {
+              "name": "RF1MILEAGEMEASURE",
+              "type": "esriFieldTypeSingle",
+              "alias": "RF1MILEAGEMEASURE",
+              "domain": null
+            },
+            {
+              "name": "ONREACHINDICATOR",
+              "type": "esriFieldTypeString",
+              "alias": "ONREACHINDICATOR",
+              "length": 1,
+              "domain": null
+            },
+            {
+              "name": "NRCSWATERSHEDIDENTIFIER",
+              "type": "esriFieldTypeString",
+              "alias": "NRCSWATERSHEDIDENTIFIER",
+              "length": 8,
+              "domain": null
+            },
+            {
+              "name": "PRIMARYESTUARYNAME",
+              "type": "esriFieldTypeString",
+              "alias": "PRIMARYESTUARYNAME",
+              "length": 30,
+              "domain": null
+            },
+            {
+              "name": "SECONDARYESTUARYNAME",
+              "type": "esriFieldTypeString",
+              "alias": "SECONDARYESTUARYNAME",
+              "length": 30,
+              "domain": null
+            },
+            {
+              "name": "OTHERESTUARYNAME",
+              "type": "esriFieldTypeString",
+              "alias": "OTHERESTUARYNAME",
+              "length": 30,
+              "domain": null
+            },
+            {
+              "name": "GREATLAKENAME",
+              "type": "esriFieldTypeString",
+              "alias": "GREATLAKENAME",
+              "length": 15,
+              "domain": null
+            },
+            {
+              "name": "OCEANNAME",
+              "type": "esriFieldTypeString",
+              "alias": "OCEANNAME",
+              "length": 14,
+              "domain": null
+            },
+            {
+              "name": "NATIVEAMERICANLANDNAME",
+              "type": "esriFieldTypeString",
+              "alias": "NATIVEAMERICANLANDNAME",
+              "length": 256,
+              "domain": null
+            },
+            {
+              "name": "FRSKEYIDENTIFIER",
+              "type": "esriFieldTypeString",
+              "alias": "FRSKEYIDENTIFIER",
+              "length": 36,
+              "domain": null
+            },
+            {
+              "name": "STATIONSGOINDICATOR",
+              "type": "esriFieldTypeString",
+              "alias": "STATIONSGOINDICATOR",
+              "length": 1,
+              "domain": null
+            },
+            {
+              "name": "STATIONVISITED",
+              "type": "esriFieldTypeString",
+              "alias": "STATIONVISITED",
+              "length": 3,
+              "domain": null
+            },
+            {
+              "name": "PROGRAMINDICATOR",
+              "type": "esriFieldTypeString",
+              "alias": "PROGRAMINDICATOR",
+              "length": 256,
+              "domain": null
+            },
+            {
+              "name": "HUCTWELVEDIGITCODE",
+              "type": "esriFieldTypeString",
+              "alias": "HUCTWELVEDIGITCODE",
+              "length": 12,
+              "domain": null
+            },
+            {
+              "name": "SHAPE",
+              "type": "esriFieldTypeGeometry",
+              "alias": "SHAPE",
+              "domain": null
+            },
+            {
+              "name": "ORGMONLOCIDENTIFIER",
+              "type": "esriFieldTypeString",
+              "alias": "ORGMONLOCIDENTIFIER",
+              "length": 513,
+              "domain": null
+            }
+          ],
+          "displayField": "ORGANIZATIONFORMALNAME",
+          "objectIdField": {
+            "name": "PKISNIDENTIFIER",
+            "type": "esriFieldTypeOID",
+            "alias": "PKISNIDENTIFIER",
+            "domain": null
+          },
+          "typeIdField": null
+        }
+      },
+      "widget~_5~1": {
+        "id": "widget~_5~1",
+        "type": "Features",
+        "label": "HUC (12 Digit) Subwatershed",
+        "dataSchema": {
+          "geometryType": "esriGeometryPolygon",
+          "fields": [
+            {
+              "name": "OBJECTID",
+              "type": "esriFieldTypeOID",
+              "alias": "OBJECTID",
+              "domain": null
+            },
+            {
+              "name": "Shape",
+              "type": "esriFieldTypeGeometry",
+              "alias": "Shape",
+              "domain": null
+            },
+            {
+              "name": "HUC_12",
+              "type": "esriFieldTypeString",
+              "alias": "HUC_12",
+              "length": 12,
+              "domain": null
+            },
+            {
+              "name": "Pct_Land",
+              "type": "esriFieldTypeDouble",
+              "alias": "Percent Land",
+              "domain": null
+            },
+            {
+              "name": "HUC4",
+              "type": "esriFieldTypeString",
+              "alias": "HUC4",
+              "length": 4,
+              "domain": null
+            },
+            {
+              "name": "HUC8",
+              "type": "esriFieldTypeString",
+              "alias": "HUC8",
+              "length": 8,
+              "domain": null
+            }
+          ],
+          "displayField": "HUC_12",
+          "objectIdField": {
+            "name": "OBJECTID",
+            "type": "esriFieldTypeOID",
+            "alias": "OBJECTID",
+            "domain": null
+          },
+          "typeIdField": null
+        }
+      },
+      "widget~_5~2": {
+        "id": "widget~_5~2",
+        "type": "Features",
+        "label": "HUC (8 Digit) Subbasin",
+        "dataSchema": {
+          "geometryType": "esriGeometryPolygon",
+          "fields": [
+            {
+              "name": "OBJECTID",
+              "type": "esriFieldTypeOID",
+              "alias": "OBJECTID",
+              "domain": null
+            },
+            {
+              "name": "Shape",
+              "type": "esriFieldTypeGeometry",
+              "alias": "Shape",
+              "domain": null
+            },
+            {
+              "name": "HUC8",
+              "type": "esriFieldTypeString",
+              "alias": "HUC8",
+              "length": 8,
+              "domain": null
+            },
+            {
+              "name": "Shape_Length",
+              "type": "esriFieldTypeDouble",
+              "alias": "Shape_Length",
+              "domain": null
+            },
+            {
+              "name": "Shape_Area",
+              "type": "esriFieldTypeDouble",
+              "alias": "Shape_Area",
+              "domain": null
+            }
+          ],
+          "displayField": "HUC8",
+          "objectIdField": {
+            "name": "OBJECTID",
+            "type": "esriFieldTypeOID",
+            "alias": "OBJECTID",
+            "domain": null
+          },
+          "typeIdField": null
+        }
+      }
+    },
+    "settings": {}
+  }
+}

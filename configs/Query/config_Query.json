@@ -1,0 +1,535 @@
+{
+  "hideLayersAfterWidgetClosed": true,
+  "labelTasks": "",
+  "labelResults": "",
+  "queries": [
+    {
+      "url": "https://watersgeo.epa.gov/arcgis/rest/services/OWPROGRAM/STORET_NAD83/MapServer/0",
+      "name": "Water Monitoring Locations",
+      "icon": "",
+      "filter": {
+        "logicalOperator": "AND",
+        "parts": [],
+        "expr": "1=1"
+      },
+      "showSQL": true,
+      "spatialFilter": {
+        "currentMapExtent": null,
+        "drawing": null,
+        "useFeatures": {
+          "default": true,
+          "relationships": [
+            {
+              "relationship": "SPATIAL_REL_INTERSECTS",
+              "label": "intersect"
+            }
+          ],
+          "buffer": null
+        },
+        "fullLayerExtent": null
+      },
+      "popupInfo": {
+        "title": "{ORGANIZATIONFORMALNAME}{MONITORINGLOCATIONIDENTIFIER}",
+        "fieldInfos": [
+          {
+            "fieldName": "PKISNIDENTIFIER",
+            "label": "PKISNIDENTIFIER",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "ORGANIZATIONIDENTIFIER",
+            "label": "ORGANIZATIONIDENTIFIER",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "ORGANIZATIONFORMALNAME",
+            "label": "ORGANIZATIONFORMALNAME",
+            "tooltip": "",
+            "visible": true,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "MONITORINGLOCATIONIDENTIFIER",
+            "label": "MONITORINGLOCATIONIDENTIFIER",
+            "tooltip": "",
+            "visible": true,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "MONITORINGLOCATIONNAME",
+            "label": "MONITORINGLOCATIONNAME",
+            "tooltip": "",
+            "visible": true,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "MONITORINGLOCATIONTYPENAME",
+            "label": "MONITORINGLOCATIONTYPENAME",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "LATITUDEMEASURE",
+            "label": "LATITUDEMEASURE",
+            "tooltip": "",
+            "visible": true,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            },
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "LONGITUDEMEASURE",
+            "label": "LONGITUDEMEASURE",
+            "tooltip": "",
+            "visible": true,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            },
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "HORIZONTALREFERENCEDATUMCODE",
+            "label": "HORIZONTALREFERENCEDATUMCODE",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "HORIZONTALREFERENCEDATUMNAME",
+            "label": "HORIZONTALREFERENCEDATUMNAME",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "HORIZONTALCOLLECTIONMETHODNAME",
+            "label": "HORIZONTALCOLLECTIONMETHODNAME",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "SOURCEMAPSCALENUMBER",
+            "label": "SOURCEMAPSCALENUMBER",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "VERTICALMEASUREVALUE",
+            "label": "VERTICALMEASUREVALUE",
+            "tooltip": "",
+            "visible": true,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "VERTICALMEASUREUNITCODE",
+            "label": "VERTICALMEASUREUNITCODE",
+            "tooltip": "",
+            "visible": true,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "VERTICALREFERENCEDATUMCODE",
+            "label": "VERTICALREFERENCEDATUMCODE",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "VERTICALREFERENCEDATUMNAME",
+            "label": "VERTICALREFERENCEDATUMNAME",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "VERTICALCOLLECTIONMETHODTEXT",
+            "label": "VERTICALCOLLECTIONMETHODTEXT",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "COUNTRYNAME",
+            "label": "COUNTRYNAME",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "STATENAME",
+            "label": "STATENAME",
+            "tooltip": "",
+            "visible": true,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "COUNTYNAME",
+            "label": "COUNTYNAME",
+            "tooltip": "",
+            "visible": true,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "COUNTRYCODE",
+            "label": "COUNTRYCODE",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "FIPSSTATECODE",
+            "label": "FIPSSTATECODE",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "FIPSCOUNTYCODE",
+            "label": "FIPSCOUNTYCODE",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "HUCEIGHTDIGITCODE",
+            "label": "HUCEIGHTDIGITCODE",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "HUCEIGHTDIGITNAME",
+            "label": "HUCEIGHTDIGITNAME",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "RF1SEGMENTCODE",
+            "label": "RF1SEGMENTCODE",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "RF1SEGMENTNAME",
+            "label": "RF1SEGMENTNAME",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "RF1MILEAGEMEASURE",
+            "label": "RF1MILEAGEMEASURE",
+            "tooltip": "",
+            "visible": false,
+            "format": {
+              "places": 2,
+              "digitSeparator": true
+            },
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "ONREACHINDICATOR",
+            "label": "ONREACHINDICATOR",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "NRCSWATERSHEDIDENTIFIER",
+            "label": "NRCSWATERSHEDIDENTIFIER",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "PRIMARYESTUARYNAME",
+            "label": "PRIMARYESTUARYNAME",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "SECONDARYESTUARYNAME",
+            "label": "SECONDARYESTUARYNAME",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "OTHERESTUARYNAME",
+            "label": "OTHERESTUARYNAME",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "GREATLAKENAME",
+            "label": "GREATLAKENAME",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "OCEANNAME",
+            "label": "OCEANNAME",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "NATIVEAMERICANLANDNAME",
+            "label": "NATIVEAMERICANLANDNAME",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "FRSKEYIDENTIFIER",
+            "label": "FRSKEYIDENTIFIER",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "STATIONSGOINDICATOR",
+            "label": "STATIONSGOINDICATOR",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "STATIONVISITED",
+            "label": "STATIONVISITED",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "PROGRAMINDICATOR",
+            "label": "PROGRAMINDICATOR",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "HUCTWELVEDIGITCODE",
+            "label": "HUCTWELVEDIGITCODE",
+            "tooltip": "",
+            "visible": true,
+            "format": null,
+            "stringFieldOption": "textbox"
+          },
+          {
+            "fieldName": "ORGMONLOCIDENTIFIER",
+            "label": "ORGMONLOCIDENTIFIER",
+            "tooltip": "",
+            "visible": false,
+            "format": null,
+            "stringFieldOption": "textbox"
+          }
+        ],
+        "description": null,
+        "showAttachments": false,
+        "mediaInfos": [],
+        "readFromWebMap": false
+      },
+      "orderByFields": [],
+      "useLayerSymbol": true,
+      "resultsSymbol": null,
+      "canModifySymbol": false,
+      "keepResultsOnMapAfterCloseWidget": true,
+      "enableExport": false,
+      "singleResultLayer": true,
+      "webMapLayerId": null
+    },
+    {
+      "url": "https://enviroatlas.epa.gov/arcgis/rest/services/Other/HydrologicUnits/MapServer//4",
+      "name": "HUC (12 Digit) Subwatershed",
+      "icon": "",
+      "filter": {
+        "logicalOperator": "AND",
+        "parts": [
+          {
+            "fieldObj": {
+              "name": "HUC_12",
+              "label": "HUC_12",
+              "shortType": "string",
+              "type": "esriFieldTypeString"
+            },
+            "operator": "stringOperatorIs",
+            "valueObj": {
+              "isValid": true,
+              "type": "value",
+              "value": ""
+            },
+            "interactiveObj": {
+              "prompt": "HUC_12 is",
+              "hint": "r",
+              "cascade": "none"
+            },
+            "caseSensitive": false
+          }
+        ],
+        "expr": ""
+      },
+      "showSQL": true,
+      "spatialFilter": {
+        "currentMapExtent": null,
+        "drawing": null,
+        "useFeatures": null,
+        "fullLayerExtent": null
+      },
+      "popupInfo": {
+        "readFromWebMap": true
+      },
+      "orderByFields": [],
+      "useLayerSymbol": false,
+      "resultsSymbol": {
+        "color": [
+          192,
+          80,
+          77,
+          36
+        ],
+        "outline": {
+          "color": [
+            160,
+            63,
+            60,
+            255
+          ],
+          "width": 1.5,
+          "type": "esriSLS",
+          "style": "esriSLSSolid",
+          "marker": null
+        },
+        "type": "esriSFS",
+        "style": "esriSFSSolid"
+      },
+      "canModifySymbol": false,
+      "keepResultsOnMapAfterCloseWidget": true,
+      "enableExport": false,
+      "singleResultLayer": true,
+      "webMapLayerId": "Watershed Boundary Dataset_4"
+    },
+    {
+      "url": "https://enviroatlas.epa.gov/arcgis/rest/services/Other/HydrologicUnits/MapServer//2",
+      "name": "HUC (8 Digit) Subbasin",
+      "icon": "",
+      "filter": {
+        "logicalOperator": "AND",
+        "parts": [
+          {
+            "fieldObj": {
+              "name": "HUC8",
+              "label": "HUC8",
+              "shortType": "string",
+              "type": "esriFieldTypeString"
+            },
+            "operator": "stringOperatorIs",
+            "valueObj": {
+              "isValid": true,
+              "type": "value",
+              "value": ""
+            },
+            "interactiveObj": {
+              "prompt": "HUC8 is",
+              "hint": "s",
+              "cascade": "none"
+            },
+            "caseSensitive": false
+          }
+        ],
+        "expr": ""
+      },
+      "showSQL": true,
+      "spatialFilter": {
+        "currentMapExtent": null,
+        "drawing": null,
+        "useFeatures": null,
+        "fullLayerExtent": null
+      },
+      "popupInfo": {
+        "readFromWebMap": true
+      },
+      "orderByFields": [],
+      "useLayerSymbol": false,
+      "resultsSymbol": {
+        "color": [
+          155,
+          187,
+          89,
+          128
+        ],
+        "outline": {
+          "color": [
+            115,
+            140,
+            61,
+            255
+          ],
+          "width": 1.5,
+          "type": "esriSLS",
+          "style": "esriSLSSolid",
+          "marker": null
+        },
+        "type": "esriSFS",
+        "style": "esriSFSSolid"
+      },
+      "canModifySymbol": false,
+      "keepResultsOnMapAfterCloseWidget": true,
+      "enableExport": false,
+      "singleResultLayer": true,
+      "webMapLayerId": "Watershed Boundary Dataset_2"
+    }
+  ]
+}

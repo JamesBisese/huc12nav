@@ -1,0 +1,100 @@
+{
+  "layers": {
+    "layer": [
+      {
+        "type": "Feature",
+        "fltype": "Feature Layer",
+        "url": "https://watersgeo.epa.gov/arcgis/rest/services/OWPROGRAM/STORET_NAD83/MapServer/0",
+        "name": "STORET locations",
+        "opacity": 0.6,
+        "visible": false,
+        "showLabels": true,
+        "hideInLegend": false,
+        "trackEditByLDAP": false,
+        "limitEditByLDAP": false,
+        "autorefresh": 0,
+        "minScale": "",
+        "maxScale": "",
+        "labelMinScale": "",
+        "labelMaxScale": "",
+        "customLabel": "",
+        "definitionQuery": "",
+        "customRenderer": "",
+        "customLabelStyle": "",
+        "mode": "ondemand"
+      },
+      {
+        "type": "Dynamic",
+        "name": "Watershed Boundary Dataset (enviroatlas)",
+        "url": "https://enviroatlas.epa.gov/arcgis/rest/services/Other/HydrologicUnits/MapServer/",
+        "opacity": 0.6,
+        "visible": true,
+        "hideInLegends": "{\"0\":false,\"1\":false,\"2\":false,\"3\":false,\"4\":false,\"5\":false}",
+        "imageformat": "png8",
+        "autorefresh": 0,
+        "popup": {
+          "infoTemplates": [
+            {
+              "layerId": 4,
+              "title": "Subbasin  (enviroatlas)",
+              "fieldInfos": [
+                {
+                  "fieldName": "HUC_12",
+                  "label": "HUC_12",
+                  "visible": true
+                },
+                {
+                  "fieldName": "Pct_Land",
+                  "label": "Percent Land",
+                  "visible": true
+                },
+                {
+                  "fieldName": "HUC4",
+                  "label": "HUC4",
+                  "visible": true
+                },
+                {
+                  "fieldName": "HUC8",
+                  "label": "HUC8",
+                  "visible": true
+                }
+              ],
+              "showAttachments": false
+            },
+            {
+              "layerId": 2,
+              "title": "Basin (enviroatlas)",
+              "fieldInfos": [
+                {
+                  "fieldName": "HUC8",
+                  "label": "HUC8",
+                  "visible": true
+                }
+              ],
+              "showAttachments": false
+            },
+            {
+              "layerId": 0,
+              "title": "HUC4",
+              "fieldInfos": [
+                {
+                  "fieldName": "HUC4",
+                  "label": "HUC4",
+                  "visible": true
+                }
+              ],
+              "showAttachments": false
+            }
+          ]
+        },
+        "imagedpi": 96,
+        "disableclientcaching": false,
+        "minScale": "",
+        "maxScale": "",
+        "hidelayers": "1,3,5",
+        "definitionQueries": "{}"
+      }
+    ]
+  },
+  "review": false
+}

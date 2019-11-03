@@ -1,0 +1,33 @@
+{
+  "layerInfos": [
+    {
+      "name": "navHUC12Layer Results",
+      "id": "graphicsLayer10",
+      "layer": {
+        "url": ""
+      },
+      "show": false,
+      "showAttachments": false
+    },
+    {
+      "name": "Clicked HUC12(s)",
+      "id": "graphicsLayer9",
+      "layer": {
+        "url": ""
+      },
+      "show": false,
+      "showAttachments": false
+    }
+  ],
+  "table": {
+    "pageSizeOptions": [
+      25,
+      50,
+      100,
+      1000
+    ]
+  },
+  "hideExportButton": false,
+  "initiallyExpand": false,
+  "filterByMapExtent": true
+}
