@@ -4,9 +4,20 @@ This repo contains a customized Web AppBuilder
 map/framework, and 1 Web AppBuilder Custom Widget
 - [HUC12Nav](https://github.com/JamesBisese/huc12nav/blob/master/widgets/ttHUC12Nav/README.md)
 
-## HUC12Nav:huc12nav: [live demo](https://insdev1.tetratech.com/huc12nav/)
+## HUC12Nav :bar_chart: [live demo](https://insdev1.tetratech.com/huc12nav/)
+The HUC12Nav is a custom widget to navigate upstream and downstream on the 
+Watershed Boundary Dataset (Subwatersheds) and summarize attributes.
+
+![.](images/HUC12Nav_wab.PNG)
+
 
 ### Deploy the app
+
+The entire repo can be deployed in a web server.  It contains all the 
+libraries necessary to render the map and run the widget.
+
+The data server used by the widget for navigation IS NOT in this repo -
+it is housed in the repo https://github.com/JamesBisese/wbd
 
 Do the following to deploy the app on your server:
 
