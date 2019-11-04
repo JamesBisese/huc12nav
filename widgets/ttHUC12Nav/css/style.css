@@ -1669,6 +1669,9 @@ h3 {
     padding-top: 1px;
     padding-bottom: 1px;
 }
+#gridNavResults  {
+    margin-top: 4px;
+}
 #gridNavResults .dojoxGridCell {
     padding-top: 1px;
     padding-bottom: 1px;

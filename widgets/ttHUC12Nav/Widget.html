@@ -18,7 +18,8 @@
 					<input id="showAllHUC12" name='show_all_huc12_bool' type='checkbox' />Show all navigated HUC12s
 				</div>
                 -->
-                <div style="display: flex; border-style: solid; border-width: thin; border-color: #ccc; padding: 3px;">
+<!--?<div class="popup-menu-button esearch-result-action-button" data-dojo-attach-event="click:_onConfirmationBtnMenuClicked" data-dojo-attach-point="divOptions" title="ResultsAction" ></div>-->
+                <div style="display: flex; padding: 3px;margin-top:-15px;">
                     <div data-dojo-attach-point="drawBox" data-dojo-type="jimu/dijit/DrawBox"
                          data-dojo-props="types:['point','polyline','polygon'],showClear:false"
                         style="width:20%; margin-left:13px;">
@@ -66,7 +67,7 @@
                 <!-- END these are just not used, but leave them -->
 
                 <div data-dojo-attach-point="divNavigationMessages" style="font-size: 16px;"></div>
-
+                <div data-dojo-attach-point="progressbar"></div>
                 <div id="grids" >
 
                     <div id="gridHUC12"></div>
@@ -99,7 +100,7 @@
         </div>
         <br style="display: none;">
         <div id="NavigateErrorMessage" style="display: none;"></div>
-        <label style="display: none;">Subwatershed HUC12:
+        <label style="FOOdisplay: none;">Subwatershed HUC12:
             <input type="text" data-dojo-attach-point="divNavigationHUCode" value="" maxlength="12"
                    onkeypress="return chkNumeric(event)" style="margin-left: 5px; font-size: 11px; font-weight: lighter;width: 100px;"/>
             <button type="submit" class="btn btn-primary" id="navigateViaText" style="padding: 2px;" disabled
@@ -165,7 +166,7 @@
         </div>
     </div>
     <div class="search-tab-node-hidden" data-dojo-attach-point="tabNode4" style="overflow: hidden;">
-      <div data-dojo-attach-point="progressbar"></div>
+
       <div data-dojo-attach-point="divResultMessage" class="esearch-noResults"></div>
       <div class="popup-menu-button esearch-result-action-button" data-dojo-attach-event="click:_onBtnMenuClicked" data-dojo-attach-point="divOptions" title="${nls.resultactions}" style="display:none;"></div>
       <div data-dojo-attach-point="listDiv"></div>

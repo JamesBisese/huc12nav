@@ -1,3 +1,11 @@
+# ESRI Web AppBuilder Custom Widgets
+____
+This repo contains a customized Web AppBuilder
+map/framework, and 1 Web AppBuilder Custom Widget
+- [HUC12Nav](https://github.com/JamesBisese/huc12nav/blob/master/widgets/ttHUC12Nav/README.md)
+
+## HUC12Nav:huc12nav: [live demo](https://insdev1.tetratech.com/huc12nav/)
+
 ### Deploy the app
 
 Do the following to deploy the app on your server:
@@ -77,5 +85,37 @@ $ dir
 11/03/2019  01:42 PM    <DIR>          themes
 11/03/2019  01:42 PM               521 web.config
 11/03/2019  01:43 PM    <DIR>          widgets
+
+james.bisese@DIVS704INSWEB1 C:\inetpub\wwwroot\huc12nav\widgets\ttHUC12Nav
+$ dir Widget.js
+11/03/2019  01:41 PM           224,242 Widget.js
 ...
+
+james.bisese@DIVS704INSWEB1 C:\inetpub\wwwroot\huc12nav
+$ git pull
+remote: Enumerating objects: 13, done.
+remote: Counting objects: 100% (13/13), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 7 (delta 5), reused 7 (delta 5), pack-reused 0
+Unpacking objects: 100% (7/7), done.
+From https://github.com/JamesBisese/huc12nav
+   71d2227..ffbd3aa  master     -> origin/master
+Updating 71d2227..ffbd3aa
+Fast-forward
+ .gitignore                   |  59 ++++++-
+ README.md                    |  35 +++-
+ widgets/ttHUC12Nav/Widget.js | 383 +++++++++++++++++++++++++++++--------------  3 files changed, 351 insertions(+), 126 deletions(-)
+ ~~~~
+After the last update
+ ~~~~
+james.bisese@DIVS704INSWEB1 C:\inetpub\wwwroot\huc12nav\widgets\ttHUC12Nav
+$ dir Widget.js
+11/03/2019  05:31 PM           224,271 Widget.js
+ ~~~~
+if there are no updates
+~~~~
+james.bisese@DIVS704INSWEB1 C:\inetpub\wwwroot\huc12nav
+$ git pull
+Already up to date.
+
 ~~~~

@@ -96,7 +96,8 @@ define([
 	'jimu/dijit/CheckBox',
 	'dijit/form/DropDownButton',
 	'dijit/Menu',
-	'dijit/MenuItem'
+	'dijit/MenuItem',
+    'dijit/ConfirmDialog'
 	],
 function (
 	declare, 
@@ -131,7 +132,8 @@ function (
 	FeatureSet, 
 	domConstruct, 
 	domClass, 
-	topic
+	topic,
+    ConfirmDialog
 ) { /*jshint unused: true*/
 
 return declare([BaseWidget, _WidgetsInTemplateMixin], {
@@ -224,6 +226,8 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
 	featHUC8: null,
 
     hu12_headwater_list: [],
+
+
     //END new
 
 	//jab-end
@@ -322,9 +326,31 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
             var huc_code_input = this.divNavigationHUCode;
             if (huc_code_input.value.length == 12){
                 //TODO: use a dijit Dialog for this question rather than javascript built-in
+    // create instance
+    var dialog = new ConfirmDialog({
+        title: "Session Expiration",
+        content: "the test. Your session is about to expire. Do you want to continue?",
+        style: "width: 300px"
+    });
+
+    // change button labels
+    dialog.set("buttonOk","Yes");
+    dialog.set("buttonCancel","No");
+
+    // register events
+    dialog.on('execute', function() { /*do something*/ });
+    dialog.on('cancel', function() { /*do something*/ });
+
+    // show
+    // dialog.show();
+
+
+        // myDialog.refresh();
+        // myDialog.show();
+
                 var r = confirm("Do you want to navigate " + direction.toLowerCase() + " from subwatershed " + huc_code_input.value + "'?");
                 if (r == true){
-                    executeHUCSearch(huc_code_input.value)
+                    this.executeHUCSearch(huc_code_input.value);
                 }
             }
 
@@ -566,6 +592,22 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
         }));
         return featureSet;
       },
+    _onConfirmationBtnMenuClicked: function(evt){
+	        myDialog = new ConfirmDialog({
+            title: "My ConfirmDialog",
+            content: "Test content.",
+            buttonCancel: "Label of cancel button",
+            buttonOk: "Label of OK button",
+            style: "width: 300px",
+            onCancel: function(){
+                //Called when user has pressed the Dialog's cancel button, to notify container.
+            },
+            onExecute: function(){
+               //Called when user has pressed the dialog's OK button, to notify container.
+            }
+            });
+	        myDialog.show();
+    },
 
       _onBtnMenuClicked: function(evt){
         var position = html.position(evt.target || evt.srcElement);
@@ -2142,7 +2184,7 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
         this.progressBar = new ProgressBar({
           indeterminate: true
         }, this.progressbar);
-        html.setStyle(this.progressBar.domNode, 'display', 'none');
+        html.setStyle(this.progressBar.domNode, 'display', 'none'); // always show '' hide 'none'
       },
 
       _initSelectedLayerExpressions: function () {
@@ -2649,10 +2691,12 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
           }
         }
 
+
         // if (this.rsltsTab) {
         //   this.tabContainer.selectTab(this.nls.results);
         // }
         html.setStyle(this.progressBar.domNode, 'display', 'block');
+        // this.progressBar.domNode.innerHTML = "Searching ...";
         html.setStyle(this.divOptions, 'display', 'none');
         var fields = [];
         if (this.config.layers[layerIndex].fields.all) {
@@ -3123,6 +3167,7 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
 			visibility: "hidden",
 			autoHeight:true,
 			selectable: true,
+            canSort: function(){return false},
 			structure: [
 	        {name:"HUC12", field:"HUC12", width: "120px"},
 	        {name:"HUC12 Name", field:"HU_12_Name", width: "249px"},
@@ -3139,6 +3184,7 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
 			visibility: "hidden",
 			autoHeight:true,
 			selectable: true,
+            canSort: function(){return false},
 			structure: [
 	        {name:"Attribute", field:"key", width: "175px"},
 	        {name:"Value", field:"value", width: "194px"},
@@ -3154,6 +3200,7 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
 			visibility: "hidden",
 			autoHeight:true,
 			selectable: true,
+            canSort: function(){return false},
 			structure: [
 	        {name:"Indicator", field:"key", width: "150px"},
 	        {name:"Value", field:"value", width: "278px"},
@@ -3265,6 +3312,9 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
 		 * call to get HUC12 Upstream navigation results - This is a REST service - NOT GIS
 		 */
 		// url: navigator_url + '/huc/' + huc_id + '/' + navigation_direction.toLowerCase() + '/?format=json&summary_data=true',
+                    //TODO: progressBar
+            html.setStyle(this.progressBar.domNode, 'display', '');
+            this.progressBar.domNode.innerText = "starting " + this.navigator_url + " search!"
 		var request = esriRequest({
 				url: this.navigator_url + '/huc/' + huc_id + '/' + navigation_direction.toLowerCase() + '/',
 				content: {
@@ -3401,7 +3451,8 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
             // show grid
             dojo.style(dom.byId("gridNavResults"), 'display', '');
             // NProgress.done();
-            hideLoading();
+            //TODO: progressBar
+            html.setStyle(this.progressBar.domNode, 'display', 'none');
             // alert("Error: There are no navigation results for the selected HU");
             return;
         }
@@ -3416,6 +3467,10 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
 
         if (huc12_ids_len > 0)
         {
+            html.setStyle(this.progressBar.domNode, 'display', '');
+            this.progressBar.domNode.innerText = "done " + this.navigator_url + " search. Found " + huc12_ids_len.toString() + " h12s. Starting ArcGIS Query";
+
+
             //todo: check that it exists
             var huc_code_index_nu = data.navigation_data.results.hu12_data.fields.huc_code;
 
@@ -3538,6 +3593,7 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
         }
         else
         {
+            this.progressBar.domNode.innerText = "done " + this.navigator_url + " search. Failed to find HU12"
             var query12 = new Query();
             query12.where = "HUC_12 = '" + data.huc12 + "'";
             query12.returnGeometry = true;
@@ -3608,7 +3664,8 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
 	handleUpstreamNavigationQueryResults: function(Qresults)
 	{
 		console.timeEnd("ArcGIS Query");
-		
+        this.progressBar.domNode.innerText = "Done ArcGIS Query.  Rendering";
+
 		console.time("ArcGIS Display Results");
 		
 		var that = this;
@@ -3803,7 +3860,69 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
 		
 		console.timeEnd("ArcGIS Display Results");
 	},
-	
+
+    //
+    // Search using a HU12 code
+    //
+    executeHUCSearch: function (huc_code)
+	{
+		var exHUC12, exHUC8, promises;
+
+		// to hide grid
+		dojo.style(dom.byId("gridNavResults"), 'display', 'none');
+		dojo.style(dom.byId("gridAttributeResults"), 'display', 'none');
+
+		this.results_json = {};
+		//dojo.destroy("grid");
+		// create an extent from the mapPoint that was clicked
+		// this is used to return features within 2 pixel of the click point
+
+		//NProgress.start();
+
+		// map_click_point = e.mapPoint;
+		// var pxWidth = app.map.extent.getWidth() / app.map.width;
+		// var padding = 1 * pxWidth;
+		// map_click_pointGeom = new Extent({
+		// 	"xmin" : map_click_point.x - padding, "ymin" : map_click_point.y - padding,
+		// 	"xmax" : map_click_point.x + padding, "ymax" : map_click_point.y + padding,
+		// 	"spatialReference" : map_click_point.spatialReference
+		// });
+		//
+		// add_click_point_graphic(map_click_point);
+		dojo.style(dom.byId("gridHUC12"), 'display', 'none');
+
+		// dom.byId("NavigationMessages").innerHTML = 'Searching HUC12s using HUC_CODE ' + huc_code;
+
+		// use the 'map_click_pointGeom' for the initial query
+		if (huc_code.length == 8)
+		{
+			this.qHUC12.where = this.huc8_field_nm + "  = '" + huc_code + "'";
+
+		}
+		else
+		{
+			this.qHUC12.where = this.huc12_field_nm + "  LIKE '" + huc_code + "%'";
+		}
+		//this.qHUC12.where = huc12_field_nm + "  = '" + huc_code + "'";
+
+		this.qHUC8.where = this.huc8_field_nm + "  = '" + huc_code.substr(0, 8) + "'";
+
+		this.exHUC12 = this.qtHUC12.execute(this.qHUC12);
+
+		this.exHUC8  = this.qtHUC8.execute(this.qHUC8);
+
+		// send these off for processing
+		promises = all([ this.exHUC12 ]); // , exHUC8
+
+		// promises.then(handleQueryResults);
+        var that = this;
+        promises.then(
+                function(data) { that.handleUpstreamNavigationQueryResults(data) }
+            );
+
+
+		console.log("++++ user entered huc_code. running initial HUC12 query ++++");
+	},
 	//
 	// this is using 'data' - the results of the REST query - NOT ArcGIS
 	//
@@ -5681,7 +5800,8 @@ return declare([BaseWidget, _WidgetsInTemplateMixin], {
             dijit.byId('gridAttributeResults').resize();
 
             //NProgress.start();
-            showLoading();
+            // showLoading();
+            //TODO progressBar
             t0 = performance.now();
             //request.then(this.recomputeSucceeded, this.recomputeFailed);
             request.then(
